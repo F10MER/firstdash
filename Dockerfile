@@ -1,4 +1,4 @@
-    Dockerfile
+    dockerfile
     # Используйте базовый образ Node.js для сборки
     FROM node:18-alpine AS builder
 
