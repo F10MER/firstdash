@@ -1,4 +1,4 @@
-    ```Dockerfile
+    Dockerfile
     # Используйте базовый образ Node.js для сборки
     FROM node:18-alpine AS builder
 
@@ -25,4 +25,3 @@
 
     # Укажите Caddy использовать Caddyfile
     CMD ["caddy", "run", "--config", "Caddyfile", "--adapter", "caddyfile"]
-    ```
