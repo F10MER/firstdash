@@ -1,4 +1,4 @@
-    ```caddy
+    caddy
     :80 {
         root * /app/dist
         file_server
@@ -13,4 +13,3 @@
             match /assets/*.css
         }
     }
-    ```
