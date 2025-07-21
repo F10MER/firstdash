@@ -7,7 +7,7 @@ COPY package.json package-lock.json
 
 RUN npm install --force # Или pnpm install --force, yarn install --force
 
-COPY . .
+COPY package.json package-lock.json ./
 
 RUN npm run build # Или pnpm run build, yarn build
 
