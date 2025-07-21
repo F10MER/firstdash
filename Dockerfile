@@ -1,28 +1,33 @@
-# Используйте базовый образ Node.js для сборки
+# Этап 1: Сборка приложения
 FROM node:18-alpine AS builder
 
 WORKDIR /app
 
-COPY package.json package-lock.json ./
+# Устанавливаем pnpm
+RUN npm install -g pnpm
 
-# Рекомендуется использовать 'npm ci' для более надежных сборок
-RUN npm ci
+# Копируем файлы зависимостей
+COPY package.json pnpm-lock.yaml ./
 
+# Устанавливаем зависимости с помощью pnpm
+RUN pnpm install --frozen-lockfile
+
+# Копируем остальные файлы проекта
 COPY . .
 
-RUN npm run build
+# Собираем проект
+RUN pnpm run build
 
-# Используйте образ Caddy для обслуживания статики
+# Этап 2: Запуск приложения с помощью Caddy
 FROM caddy:latest
 
-# Установите рабочий каталог
 WORKDIR /app
 
-# Скопируйте собранные файлы из этапа builder
+# Копируем собранные файлы из этапа сборки
 COPY --from=builder /app/dist ./dist
 
-# Скопируйте Caddyfile
+# Копируем конфигурацию Caddy
 COPY Caddyfile ./
 
-# Укажите Caddy использовать Caddyfile
+# Запускаем Caddy
 CMD ["caddy", "run", "--config", "/app/Caddyfile", "--adapter", "caddyfile"]
