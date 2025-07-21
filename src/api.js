@@ -1,5 +1,7 @@
+// src/api.js
+
 // API модуль для интеграции с n8n webhook
-const API_BASE_URL = process.env.REACT_APP_N8N_WEBHOOK_URL || 'https://your-n8n-webhook-url.com'
+const API_BASE_URL = import.meta.env.VITE_N8N_WEBHOOK_URL || 'https://your-n8n-webhook-url.com'
 
 export const fetchContacts = async () => {
   try {
