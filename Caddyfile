@@ -1,0 +1,16 @@
+    ```caddy
+    :80 {
+        root * /app/dist
+        file_server
+
+        # Явно установить MIME-тип для JavaScript-файлов
+        header Content-Type application/javascript {
+            match /assets/*.js
+        }
+
+        # Если у вас есть другие типы файлов, которые могут вызывать проблемы (например, .css)
+        header Content-Type text/css {
+            match /assets/*.css
+        }
+    }
+    ```
