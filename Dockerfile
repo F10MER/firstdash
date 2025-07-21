@@ -3,7 +3,7 @@ FROM node:18-alpine AS builder
 
 WORKDIR /app
 
-COPY package.json pnpm-lock.yaml ./ # Или yarn.lock, package-lock.json
+COPY package.json package-lock.json 
 
 RUN npm install --force # Или pnpm install --force, yarn install --force
 
